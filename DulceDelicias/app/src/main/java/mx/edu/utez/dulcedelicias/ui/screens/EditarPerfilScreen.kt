@@ -55,5 +55,6 @@ fun EditarPerfilScreen(){
             else
                 mensaje = "Se guardaron los cambios!"
         }){ Text(text = "Guardar cambios")}
+
     }
 }
