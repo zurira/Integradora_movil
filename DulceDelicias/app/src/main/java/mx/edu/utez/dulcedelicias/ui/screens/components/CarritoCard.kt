@@ -28,8 +28,8 @@ import mx.edu.utez.dulcedelicias.data.network.model.DetallePedido
 @Composable
 fun CarritoCard(
     detallePedido: DetallePedido,
-    onIncrement: (DetallePedido) -> Unit = {},
-    onDecrement: (DetallePedido) -> Unit = {}
+    onIncrement: (DetallePedido) -> Unit,
+    onDecrement: (DetallePedido) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -43,6 +43,7 @@ fun CarritoCard(
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            // Imagen del producto
             AsyncImage(
                 model = detallePedido.producto.imagenUrl,
                 contentDescription = "Imagen de postre",
@@ -58,28 +59,21 @@ fun CarritoCard(
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     IconButton(onClick = { onDecrement(detallePedido) }) {
-                        Icon(
-                            imageVector = Icons.Filled.KeyboardArrowDown,
-                            contentDescription = "Disminuir cantidad"
-                        )
+                        Icon(Icons.Filled.KeyboardArrowDown, contentDescription = "Disminuir cantidad")
                     }
                     Text(
-                        text = detallePedido.cantidad.toString(), // <- ahora usa el modelo
+                        text = detallePedido.cantidad.toString(),
                         style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.padding(horizontal = 8.dp)
                     )
                     IconButton(onClick = { onIncrement(detallePedido) }) {
-                        Icon(
-                            imageVector = Icons.Filled.KeyboardArrowUp,
-                            contentDescription = "Aumentar cantidad"
-                        )
+                        Icon(Icons.Filled.KeyboardArrowUp, contentDescription = "Aumentar cantidad")
                     }
                 }
             }
         }
     }
 }
-
 /*@Composable
 @Preview (showBackground = true)
 fun CarritoCardPreview(){

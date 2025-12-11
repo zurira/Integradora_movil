@@ -14,7 +14,7 @@ import org.json.JSONObject
 import java.math.BigDecimal
 
 class DulceDeliciasAPI(private val context: Context) {
-    val baseURL = "http://192.168.1.73:3000/api"
+    val baseURL = "http://192.168.1.64:3000/api"
 
     // --- Adaptador para JSONObject para obtener BigDecimal (Necesario si usas BigDecimal) ---
     private fun JSONObject.getBigDecimal(name: String): BigDecimal {

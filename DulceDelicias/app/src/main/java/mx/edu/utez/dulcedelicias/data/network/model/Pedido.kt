@@ -12,7 +12,7 @@ data class Pedido(
 
     // Datos del Pedido
     val total: Double,
-    val estado: String = "Pendiente", // Ej: "Pendiente", "Enviado", "Entregado"
+    val estado: String = "Pendiente",
     val fechaPedido: Date?,
     val fechaEntrega: Date?
 )

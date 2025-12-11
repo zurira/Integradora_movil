@@ -7,5 +7,6 @@ data class DetallePedido(
     val idPedido: Int,
     val idProducto: Int,
     val cantidad: Int,
-    val precioUnitario: Double
+    val precioUnitario: Double,
+    val producto: Producto
 )
