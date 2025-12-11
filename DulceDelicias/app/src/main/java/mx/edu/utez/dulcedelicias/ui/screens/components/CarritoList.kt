@@ -5,18 +5,18 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import mx.edu.utez.dulcedelicias.data.network.model.Carrito
+import mx.edu.utez.dulcedelicias.data.network.model.DetallePedido
 
 @Composable
 fun CarritoList(
-    carritos: List<Carrito>,
-    onIncrement: (Carrito) -> Unit,
-    onDecrement: (Carrito) -> Unit
+    detallePedidos: List<DetallePedido>,
+    onIncrement: (DetallePedido) -> Unit,
+    onDecrement: (DetallePedido) -> Unit
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(carritos) { carrito ->
+        items(detallePedidos) { carrito ->
             CarritoCard(
-                carrito = carrito,
+                detallePedido = carrito,
                 onIncrement = onIncrement,
                 onDecrement = onDecrement
             )

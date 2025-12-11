@@ -13,17 +13,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import mx.edu.utez.dulcedelicias.data.network.model.Carrito
+import mx.edu.utez.dulcedelicias.data.network.model.DetallePedido
 import mx.edu.utez.dulcedelicias.ui.screens.components.CarritoList
 
 @Composable
 fun CarritoScreen(
-    carritos: List<Carrito>,
-    onIncrement: (Carrito) -> Unit,
-    onDecrement: (Carrito) -> Unit,
+    detallePedidos: List<DetallePedido>,
+    onIncrement: (DetallePedido) -> Unit,
+    onDecrement: (DetallePedido) -> Unit,
     onConfirmarPedido: () -> Unit
 ) {
-    val subtotal = carritos.sumOf { it.producto.precio * it.cantidad }
+    val subtotal = detallePedidos.sumOf { it.producto.precio * it.cantidad }
     val envio = 3.50
     val total = subtotal + envio
 
@@ -51,7 +51,7 @@ fun CarritoScreen(
         }
     ) { innerPadding ->
         CarritoList(
-            carritos = carritos,
+            detallePedidos = detallePedidos,
             onIncrement = onIncrement,
             onDecrement = onDecrement
         )

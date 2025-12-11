@@ -22,15 +22,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import mx.edu.utez.dulcedelicias.data.network.model.Carrito
-import mx.edu.utez.dulcedelicias.data.network.model.Producto
+import mx.edu.utez.dulcedelicias.data.network.model.DetallePedido
 
 
 @Composable
 fun CarritoCard(
-    carrito: Carrito,
-    onIncrement: (Carrito) -> Unit = {},
-    onDecrement: (Carrito) -> Unit = {}
+    detallePedido: DetallePedido,
+    onIncrement: (DetallePedido) -> Unit = {},
+    onDecrement: (DetallePedido) -> Unit = {}
 ) {
     Card(
         modifier = Modifier
@@ -45,7 +44,7 @@ fun CarritoCard(
             verticalAlignment = Alignment.CenterVertically
         ) {
             AsyncImage(
-                model = carrito.producto.imagenUrl,
+                model = detallePedido.producto.imagenUrl,
                 contentDescription = "Imagen de postre",
                 modifier = Modifier.size(80.dp),
                 contentScale = ContentScale.Crop
@@ -54,22 +53,22 @@ fun CarritoCard(
             Spacer(modifier = Modifier.width(10.dp))
 
             Column(modifier = Modifier.weight(1f)) {
-                Text(text = carrito.producto.nombre, style = MaterialTheme.typography.titleMedium)
-                Text(text = "$${"%.2f".format(carrito.producto.precio)}", style = MaterialTheme.typography.bodyMedium)
+                Text(text = detallePedido.producto.nombre, style = MaterialTheme.typography.titleMedium)
+                Text(text = "$${"%.2f".format(detallePedido.producto.precio)}", style = MaterialTheme.typography.bodyMedium)
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    IconButton(onClick = { onDecrement(carrito) }) {
+                    IconButton(onClick = { onDecrement(detallePedido) }) {
                         Icon(
                             imageVector = Icons.Filled.KeyboardArrowDown,
                             contentDescription = "Disminuir cantidad"
                         )
                     }
                     Text(
-                        text = carrito.cantidad.toString(), // <- ahora usa el modelo
+                        text = detallePedido.cantidad.toString(), // <- ahora usa el modelo
                         style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.padding(horizontal = 8.dp)
                     )
-                    IconButton(onClick = { onIncrement(carrito) }) {
+                    IconButton(onClick = { onIncrement(detallePedido) }) {
                         Icon(
                             imageVector = Icons.Filled.KeyboardArrowUp,
                             contentDescription = "Aumentar cantidad"
