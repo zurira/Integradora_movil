@@ -1,7 +1,5 @@
 package mx.edu.utez.dulcedelicias.ui.screens.components
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,14 +19,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import mx.edu.utez.dulcedelicias.data.network.model.Carrito
+import mx.edu.utez.dulcedelicias.data.network.model.Producto
 
 
 @Composable
 fun CarritoCard(
-
+    carrito: Carrito,
+    onIncrement: (Carrito) -> Unit = {},
+    onDecrement: (Carrito) -> Unit = {}
 ) {
     Card(
         modifier = Modifier
@@ -42,39 +44,32 @@ fun CarritoCard(
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-
-            Box(
-                modifier = Modifier
-                    .size(80.dp)
-                    .background(Color.LightGray),
-                contentAlignment = Alignment.Center
-            ) {
-                Text("Img")
-            }
+            AsyncImage(
+                model = carrito.producto.imagenUrl,
+                contentDescription = "Imagen de postre",
+                modifier = Modifier.size(80.dp),
+                contentScale = ContentScale.Crop
+            )
 
             Spacer(modifier = Modifier.width(10.dp))
 
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
-                Text(text="Nombre", style = MaterialTheme.typography.titleMedium)
-                Text(text="Precio", style = MaterialTheme.typography.bodyMedium)
+            Column(modifier = Modifier.weight(1f)) {
+                Text(text = carrito.producto.nombre, style = MaterialTheme.typography.titleMedium)
+                Text(text = "$${"%.2f".format(carrito.producto.precio)}", style = MaterialTheme.typography.bodyMedium)
 
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    IconButton(onClick = {}) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    IconButton(onClick = { onDecrement(carrito) }) {
                         Icon(
                             imageVector = Icons.Filled.KeyboardArrowDown,
                             contentDescription = "Disminuir cantidad"
                         )
                     }
                     Text(
-                        text = "1",
+                        text = carrito.cantidad.toString(), // <- ahora usa el modelo
                         style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.padding(horizontal = 8.dp)
                     )
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = { onIncrement(carrito) }) {
                         Icon(
                             imageVector = Icons.Filled.KeyboardArrowUp,
                             contentDescription = "Aumentar cantidad"
@@ -86,9 +81,8 @@ fun CarritoCard(
     }
 }
 
-
-@Composable
+/*@Composable
 @Preview (showBackground = true)
 fun CarritoCardPreview(){
     CarritoCard()
-}
+}*/
